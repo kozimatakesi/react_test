@@ -10,7 +10,6 @@ class Scraping extends React.Component {
     }
   }
 
-
   handleNumberChange() {
     let ran = Math.floor( Math.random() * 6 ) ;
     this.setState({
