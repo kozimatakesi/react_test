@@ -11,15 +11,11 @@ class App extends React.Component{
       name: "kawamoto"
     };
   }
+
   render(){
     return (
       <div>
         <h1>Hello World {this.state.name}</h1>
-        <Scraping/>
-        <Welcome
-          name="川本"
-          age="32"
-        />
         <Effect
           name="バナナマン"
         />
