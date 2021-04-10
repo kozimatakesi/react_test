@@ -2,6 +2,7 @@ import React from 'react';
 import Scraping from './Scraping';
 import {Welcome} from './Function';
 import {State} from './State';
+import {Effect} from './Effect';
 
 class App extends React.Component{
   constructor(props){
@@ -19,9 +20,10 @@ class App extends React.Component{
           name="川本"
           age="32"
         />
-        <State
-          name="劇団ひとり"
+        <Effect
+          name="バナナマン"
         />
+
       </div>
     );
   }
