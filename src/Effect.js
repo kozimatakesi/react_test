@@ -7,7 +7,7 @@ export const Effect: React.FC = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [expName, setExpName] = useState("ゼンディカー");
   const [count, setCount] = useState(0);
-  // 定数countと関数setCountを定義している useStateの引数は定数の初期値
+  //副作用フックス countが変更された場合に実行
   useEffect(() => {
     setRead(false);
     const searchName = async () => {
@@ -21,19 +21,23 @@ export const Effect: React.FC = (props) => {
     searchName();
   },[count]);
 
+  //クリックした時に表示
   const handleClickOpen = () => {
     setIsOpen(true);
   }
 
+  //クリックした時に非表示
   const handleClickClose = () => {
     setIsOpen(false);
   }
 
+  //inputに入れた文字列をstateにいれる
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
     setExpName(inputValue);
   }
 
+  //検索結果詳細の表示
   let nameResultDetail;
   if(isOpen) {
     nameResultDetail = (
@@ -51,6 +55,7 @@ export const Effect: React.FC = (props) => {
     )
   }
 
+  //APIの返答があったらボタンを表示する
   let nameResult;
   if(read) {
     nameResult = (
@@ -72,8 +77,6 @@ export const Effect: React.FC = (props) => {
       <button onClick={() => setCount(count + 1) }>
         検索
       </button>
-
-      <h2>{props.name}</h2>
       {nameResult}
     </div>
   );
