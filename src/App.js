@@ -1,7 +1,4 @@
 import React from 'react';
-import Scraping from './Scraping';
-import {Welcome} from './Function';
-import {State} from './State';
 import {Effect} from './Effect';
 
 class App extends React.Component{
