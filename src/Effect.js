@@ -6,8 +6,10 @@ export const Effect: React.FC = (props) => {
   const [read, setRead] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [expName, setExpName] = useState("ゼンディカー");
+  const [count, setCount] = useState(0);
   // 定数countと関数setCountを定義している useStateの引数は定数の初期値
   useEffect(() => {
+    setRead(false);
     const searchName = async () => {
       const html = await fetch(`http://localhost:3001/api/v1/list?name=${expName}`)
         .then(html => html.json());
@@ -17,7 +19,7 @@ export const Effect: React.FC = (props) => {
       setRead(true);
     }
     searchName();
-  },[]);
+  },[count]);
 
   const handleClickOpen = () => {
     setIsOpen(true);
@@ -67,8 +69,8 @@ export const Effect: React.FC = (props) => {
         value={expName}
         onChange={(event) => handleInputChange(event)}
       />
-      <button onClick={() => setExpName(expName) }>
-        変えよう
+      <button onClick={() => setCount(count + 1) }>
+        検索
       </button>
 
       <h2>{props.name}</h2>
