@@ -2,25 +2,16 @@ const express = require('express');
 const puppetter = require('puppeteer');
 const cors = require('cors');
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 app.use(cors({
-  origin: 'http://localhost:3000', //アクセス許可するオリジン
+  origin: ['http://localhost:3000','https://reac-test01.herokuapp.com/'], //アクセス許可するオリジン
   credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
   optionsSuccessStatus: 200 //レスポンスstatusを200に設定
 }))
 
 app.get('/api/v1/list', async (req, res) => {
-  /*
-  const todoList = [
-    { title: 'JavaScriptを勉強する', done: true },
-    { title: 'Node.jsを勉強する', done: false },
-    { title: 'Web APIを作る', done: false }
-  ];
-  res.json(todoList);
-  */
-
   console.log(req.query.name);
-
   const browser = await puppetter.launch({
     args: ['--no-sandbox'],
   });
@@ -35,4 +26,4 @@ app.get('/api/v1/list', async (req, res) => {
   res.json(nameArray);
 });
 
-app.listen(3001, () => console.log('Listening on port 3001'));
+app.listen(PORT, () => console.log('Listening on port 3001'));
