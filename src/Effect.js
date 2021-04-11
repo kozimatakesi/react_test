@@ -3,24 +3,20 @@ const fetch = require('node-fetch');
 
 export const Effect: React.FC = (props) => {
   const [myApi, setMyApi] = useState([]);
-  const [tenki, setTenki] = useState('weather');
+  const [read, setRead] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [expName, setExpName] = useState("ゼンディカー");
   // 定数countと関数setCountを定義している useStateの引数は定数の初期値
   useEffect(() => {
-    const weather = async () => {
-      const res = await fetch("http://api.openweathermap.org/data/2.5/weather?q=Tokyo&appid=5b2fdd75985558d39c733be221fd15c7&lang=ja&units=metric")
-        .then(res => res.json());
-
-      //const results = await res.json();
+    const searchName = async () => {
       const html = await fetch(`http://localhost:3001/api/v1/list?name=${expName}`)
         .then(html => html.json());
       console.log(html);
       setMyApi(html);
-      setTenki(res);
       console.log("取得したね")
+      setRead(true);
     }
-    weather();
+    searchName();
   },[]);
 
   const handleClickOpen = () => {
@@ -36,9 +32,9 @@ export const Effect: React.FC = (props) => {
     setExpName(inputValue);
   }
 
-  let weather;
+  let nameResultDetail;
   if(isOpen) {
-    weather = (
+    nameResultDetail = (
     <div>
       {myApi.map((nameValue, i) => {
         return (
@@ -46,11 +42,22 @@ export const Effect: React.FC = (props) => {
         );
       })}
 
-      <p>現在の{tenki.name}は{tenki.weather[0].description}はです</p>
       <button onClick={() => handleClickClose()}>
         閉じる
       </button>
     </div>
+    )
+  }
+
+  let nameResult;
+  if(read) {
+    nameResult = (
+      <div>
+        <button onClick={() => handleClickOpen()}>
+          検索結果を表示
+        </button>
+        {nameResultDetail}
+      </div>
     )
   }
 
@@ -65,10 +72,7 @@ export const Effect: React.FC = (props) => {
       </button>
 
       <h2>{props.name}</h2>
-      <button onClick={() => handleClickOpen()}>
-        現在の天気を表示
-      </button>
-      {weather}
+      {nameResult}
     </div>
   );
 }
