@@ -5,20 +5,11 @@ import {State} from './State';
 import {Effect} from './Effect';
 
 class App extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      name: "kawamoto"
-    };
-  }
-
   render(){
     return (
       <div>
-        <h1>Hello World {this.state.name}</h1>
-        <Effect
-          name="バナナマン"
-        />
+        <h1>Hello World</h1>
+        <Effect/>
 
       </div>
     );
