@@ -11,7 +11,7 @@ export const Effect: React.FC = (props) => {
   useEffect(() => {
     setRead(false);
     const searchName = async () => {
-      const html = await fetch(`http://localhost:3001/api/v1/list?name=${expName}`)
+      const html = await fetch(`https://secure-brushlands-05718.herokuapp.com/api/v1/list?name=${expName}`)
         .then(html => html.json());
       console.log(html);
       setMyApi(html);
