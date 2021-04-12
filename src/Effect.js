@@ -7,15 +7,17 @@ export const Effect: React.FC = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [expName, setExpName] = useState("ゼンディカー");
   const [count, setCount] = useState(0);
+  const urlPath = process.env.REACT_APP_URL_PATH;
+
   //副作用フックス countが変更された場合に実行
   useEffect(() => {
     setRead(false);
     const searchName = async () => {
-      const html = await fetch(`https://secure-brushlands-05718.herokuapp.com/api/v1/list?name=${expName}`)
+      const html = await fetch(`${urlPath}api/v1/list?name=${expName}`)
         .then(html => html.json());
       console.log(html);
       setMyApi(html);
-      console.log("取得したね")
+      console.log(urlPath)
       setRead(true);
     }
     searchName();
