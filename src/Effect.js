@@ -17,7 +17,6 @@ export const Effect: React.FC = (props) => {
         .then(html => html.json());
       console.log(html);
       setMyApi(html);
-      console.log(urlPath)
       setRead(true);
     }
     searchName();
@@ -49,7 +48,6 @@ export const Effect: React.FC = (props) => {
           <p key={i}>{nameValue.name}は{nameValue.value}</p>
         );
       })}
-
       <button onClick={() => handleClickClose()}>
         閉じる
       </button>
